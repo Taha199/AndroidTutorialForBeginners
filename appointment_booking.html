@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>حجز موعد عند الدكتور</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --primary: #2f80ed;
+        --secondary: #56ccf2;
+        --text: #1f2a37;
+        --muted: #6b7280;
+        --border: #e5e7eb;
+        --bg: #f5f7fb;
+        --card: #ffffff;
+        --success: #16a34a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Cairo", "Tahoma", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: #fff;
+        padding: 32px 16px 48px;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+      }
+
+      header p {
+        margin: 0;
+        font-size: 16px;
+        opacity: 0.9;
+      }
+
+      main {
+        max-width: 900px;
+        margin: -32px auto 40px;
+        padding: 0 16px;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+        border: 1px solid var(--border);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        font-size: 15px;
+        background: #fff;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      button {
+        border: none;
+        padding: 12px 24px;
+        border-radius: 999px;
+        font-size: 15px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .primary {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      .ghost {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text);
+      }
+
+      .info {
+        margin-top: 24px;
+        display: grid;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .banner {
+        margin-top: 20px;
+        padding: 14px 16px;
+        border-radius: 12px;
+        background: rgba(22, 163, 74, 0.12);
+        color: var(--success);
+        font-weight: 600;
+        display: none;
+      }
+
+      .banner.show {
+        display: block;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 24px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 600px) {
+        header h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>حجز موعد عند الدكتور</h1>
+      <p>أدخل بياناتك لاختيار الموعد المناسب، وسنتواصل معك لتأكيد الحجز.</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <form id="booking-form">
+          <div class="grid">
+            <div>
+              <label for="fullName">الاسم الكامل</label>
+              <input id="fullName" name="fullName" type="text" placeholder="مثال: أحمد علي" required />
+            </div>
+            <div>
+              <label for="phone">رقم الهاتف</label>
+              <input id="phone" name="phone" type="tel" placeholder="05xxxxxxxx" required />
+            </div>
+            <div>
+              <label for="email">البريد الإلكتروني</label>
+              <input id="email" name="email" type="email" placeholder="name@example.com" />
+            </div>
+            <div>
+              <label for="department">التخصص المطلوب</label>
+              <select id="department" name="department" required>
+                <option value="">اختر التخصص</option>
+                <option value="باطنية">الباطنية</option>
+                <option value="أطفال">طب الأطفال</option>
+                <option value="جلدية">الجلدية</option>
+                <option value="أسنان">الأسنان</option>
+                <option value="عيون">العيون</option>
+              </select>
+            </div>
+            <div>
+              <label for="date">التاريخ</label>
+              <input id="date" name="date" type="date" required />
+            </div>
+            <div>
+              <label for="time">الوقت المفضل</label>
+              <select id="time" name="time" required>
+                <option value="">اختر الوقت</option>
+                <option value="09:00">09:00 صباحًا</option>
+                <option value="11:00">11:00 صباحًا</option>
+                <option value="14:00">02:00 مساءً</option>
+                <option value="16:00">04:00 مساءً</option>
+                <option value="18:00">06:00 مساءً</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px;">
+            <label for="notes">ملاحظات إضافية</label>
+            <textarea id="notes" name="notes" placeholder="أخبرنا عن أي أعراض أو ملاحظات مهمة"></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="primary" type="submit">تأكيد الحجز</button>
+            <button class="ghost" type="reset">إعادة تعيين</button>
+          </div>
+        </form>
+
+        <div id="success" class="banner">تم استلام طلبك بنجاح! سيتم التواصل معك خلال 24 ساعة.</div>
+
+        <div class="info">
+          <span>🔔 يرجى التأكد من صحة رقم الهاتف لتسهيل التواصل.</span>
+          <span>🕒 أوقات العمل: من السبت إلى الخميس، 9 صباحًا - 8 مساءً.</span>
+          <span>📍 العنوان: شارع الصحة، مبنى العيادات التخصصية.</span>
+        </div>
+      </section>
+
+      <footer>جميع الحقوق محفوظة © 2025 مركز العناية الطبية</footer>
+    </main>
+
+    <script>
+      const form = document.getElementById("booking-form");
+      const banner = document.getElementById("success");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        banner.classList.add("show");
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
